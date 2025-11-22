@@ -1,0 +1,13 @@
+.postagem header {
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.postagem p {
+  margin: 0 0 var(--space-2) 0;
+  color: var(--color-text-muted);
+}
+
+.postagem footer {
+  font-weight: 600;
+}

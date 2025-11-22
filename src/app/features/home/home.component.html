@@ -1,0 +1,41 @@
+<section class="page-shell home">
+  <div class="hero card">
+    <div class="hero-header">
+      <div class="logo">LOGO</div>
+      <div class="hero-actions">
+        <a routerLink="/login" class="link">Entrar</a>
+        <ui-button variant="primary" routerLink="/cadastro">Criar conta</ui-button>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <h1>BEM-VINDO AO ESPAÇO SEGURO</h1>
+      <p>Um ambiente acolhedor para compartilhar anonimamente</p>
+      <div class="cta">
+        <ui-button variant="primary" routerLink="/sessoes/nova">Abrir sessão anônima</ui-button>
+        <ui-button variant="outline" routerLink="/postagens">Ver postagens</ui-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider-line"></div>
+
+  <div class="recent card">
+    <h2>ALGUMAS POSTAGENS RECENTES</h2>
+    <div class="posts">
+      <ui-card padding="md">
+        <header>Anônimo — há 2h</header>
+        <p>"Hoje acordei ansioso demais e não sei explicar…"</p>
+        <footer>♥ 14 &nbsp;&nbsp; 💬 3</footer>
+      </ui-card>
+      <ui-card padding="md">
+        <header>Usuário — há 5h</header>
+        <p>"Queria compartilhar que consegui pedir ajuda hoje!"</p>
+        <footer>♥ 7 &nbsp;&nbsp; 💬 1</footer>
+      </ui-card>
+    </div>
+    <div class="ver-mais">
+      <ui-button variant="outline" routerLink="/postagens">Ver mais postagens</ui-button>
+    </div>
+  </div>
+</section>

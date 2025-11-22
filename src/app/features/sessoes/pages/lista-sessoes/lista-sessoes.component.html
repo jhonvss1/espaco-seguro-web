@@ -1,0 +1,25 @@
+<section class="page-shell lista-sessoes">
+  <ui-navbar></ui-navbar>
+
+  <div class="actions">
+    <ui-button variant="primary" routerLink="/sessoes/nova">Abrir nova sessão</ui-button>
+  </div>
+
+  <div class="section-title">Suas sessões recentes:</div>
+
+  <div class="cards">
+    <sessao-card
+      titulo="Crise de ansiedade"
+      status="Em andamento"
+      resumo='Última mensagem: "Expliquei como estou me sentindo…"'
+      link="/sessoes/1"
+    ></sessao-card>
+
+    <sessao-card
+      titulo="Dúvidas sobre diagnóstico"
+      status="Respondida"
+      resumo='Última resposta: "Veja este guia oficial"'
+      link="/sessoes/2"
+    ></sessao-card>
+  </div>
+</section>

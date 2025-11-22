@@ -1,0 +1,17 @@
+.ui-navbar {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.ui-navbar a {
+  color: var(--color-text-muted);
+  font-weight: 600;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.ui-navbar a.active {
+  color: var(--color-primary);
+  background: rgba(79, 70, 229, 0.1);
+}

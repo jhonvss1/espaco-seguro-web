@@ -1,0 +1,15 @@
+<section class="page-shell feed-postagens">
+  <ui-navbar></ui-navbar>
+
+  <ui-card padding="lg" class="composer">
+    <div class="prompt">O que você quer compartilhar hoje?</div>
+    <textarea placeholder="Escreva algo…"></textarea>
+    <ui-button variant="primary">Publicar</ui-button>
+  </ui-card>
+
+  <div class="section-title">Postagens recentes</div>
+  <div class="posts">
+    <postagem-card autor="Anônimo" tempo="há 1h" texto="Meu coração parece pesado hoje…" [likes]="20" [comentarios]="6"></postagem-card>
+    <postagem-card autor="Usuário" tempo="há 4h" texto="Só queria agradecer quem me respondeu ontem!" [likes]="15" [comentarios]="3"></postagem-card>
+  </div>
+</section>

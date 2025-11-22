@@ -1,0 +1,20 @@
+.perfil {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.titulo {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.info {
+  color: var(--color-text);
+  margin-top: var(--space-1);
+}
+
+.subtitulo {
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}

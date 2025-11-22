@@ -1,0 +1,91 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.hero {
+  padding: var(--space-5);
+}
+
+.hero-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.logo {
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.link {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  margin: 0 0 var(--space-2) 0;
+  text-transform: uppercase;
+}
+
+.hero-content p {
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.cta {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.divider-line {
+  height: 2px;
+  background: var(--color-border);
+  margin: var(--space-1) 0;
+}
+
+.recent h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  letter-spacing: 0.02em;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-3);
+}
+
+ui-card header {
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+
+ui-card p {
+  margin: 0 0 var(--space-2) 0;
+  color: var(--color-text-muted);
+}
+
+ui-card footer {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.ver-mais {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-4);
+}
