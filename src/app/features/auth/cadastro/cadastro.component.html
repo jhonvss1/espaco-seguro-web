@@ -3,13 +3,93 @@
     <div class="logo">LOGO ESPAÇO SEGURO</div>
     <h1>CRIAR CONTA</h1>
 
-    <form class="form">
-      <ui-input label="Nome:" placeholder="Seu nome completo"></ui-input>
-      <ui-input label="Email:" placeholder="Seu email"></ui-input>
-      <ui-input label="Senha:" type="password" placeholder="Crie uma senha"></ui-input>
-      <ui-input label="Confirmar Senha:" type="password" placeholder="Repita a senha"></ui-input>
+    <form class="form" (ngSubmit)="onSubmit()" #form="ngForm">
+      <label class="ui-input">
+        <span class="label">Nome:</span>
+        <input
+          type="text"
+          name="nome"
+          placeholder="Seu nome completo"
+          required
+          [(ngModel)]="model.nome"
+        />
+      </label>
 
-      <ui-button variant="primary" type="submit">Criar conta</ui-button>
+      <label class="ui-input">
+        <span class="label">Data de nascimento:</span>
+        <input
+          type="date"
+          name="dataNascimento"
+          required
+          [(ngModel)]="model.dataNascimento"
+        />
+      </label>
+
+      <label class="ui-input">
+        <span class="label">Email:</span>
+        <input
+          type="email"
+          name="email"
+          placeholder="Seu email"
+          required
+          [(ngModel)]="model.email"
+        />
+      </label>
+
+      <label class="ui-input">
+        <span class="label">CPF:</span>
+        <input
+          type="text"
+          name="cpf"
+          placeholder="Seu CPF"
+          [(ngModel)]="model.cpf"
+        />
+      </label>
+
+      <label class="ui-input">
+        <span class="label">Telefone:</span>
+        <input
+          type="text"
+          name="telefone"
+          placeholder="Seu telefone"
+          [(ngModel)]="model.telefone"
+        />
+      </label>
+
+      <label class="ui-input">
+        <span class="label">Senha:</span>
+        <input
+          type="password"
+          name="senha"
+          placeholder="Crie uma senha"
+          required
+          [(ngModel)]="model.senha"
+        />
+      </label>
+
+      <label class="ui-input">
+        <span class="label">Confirmar Senha:</span>
+        <input
+          type="password"
+          name="confirmarSenha"
+          placeholder="Repita a senha"
+          required
+          [(ngModel)]="model.confirmarSenha"
+        />
+      </label>
+
+      <p>
+        <input
+          type="checkbox"
+          name="aceitaTermos"
+          [(ngModel)]="model.aceitaTermos"
+        />
+        Aceita os termos?
+      </p>
+
+      <ui-button variant="primary" type="submit">
+        Criar conta
+      </ui-button>
     </form>
 
     <div class="footer">
