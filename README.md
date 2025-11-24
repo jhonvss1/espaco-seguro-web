@@ -1,59 +1,67 @@
-# EspacoSeguroWeb
+# Espaço Seguro – Documentação Geral
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Bem-vindo ao **Espaço Seguro**, a versão web do ambiente pensado para acolher pessoas que desejam compartilhar experiências ou buscar ajuda de forma anônima. Abaixo está um panorama das decisões do projeto, funcionalidades e como evoluir o front-end.
 
-## Development server
+## 1. Visão Geral
 
-To start a local development server, run:
+- **Stack principal**: Angular 17 (standalone components, provideRouter).
+- **Estilo**: Design system próprio, com tokens em `src/global-styles.css`.
+- **Estrutura**:
+  - `src/app/core` – layout, serviços, interceptors, guardas.
+  - `src/app/features` – cada módulo funcional (auth, conteúdos, sessões etc.).
+  - `src/app/shared` – componentes reutilizáveis (button, card, navbar).
+  - `src/assets` – imagens e arquivos estáticos.
 
-```bash
-ng serve
-```
+## 2. Funcionalidades Implementadas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1. **Autenticação**:
+   - Login e cadastro com formulários reativos simples usando `[(ngModel)]`.
+   - Após login, o usuário é redirecionado para a Home e a sessão fica armazenada no `AuthService` (com persistência em `localStorage`).
+   - O cabeçalho do site alterna automaticamente entre “Entrar / Criar conta” e “Olá, {usuário} / Sair”.
 
-## Code scaffolding
+2. **Conteúdos**:
+   - Listagem dinâmica (`/conteudos`) buscando cards na API via `CardService`.
+   - Tela de detalhe (`/conteudos/:id`) consumindo o endpoint de detalhe e exibindo o corpo completo.
+   - Formulário de criação de conteúdo com envio automático do `autorId`.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+3. **Sessões/Postagens**: Esqueleto inicial para telas futuras (cards, conversas, feed etc.), seguindo os mockups.
 
-```bash
-ng generate component component-name
-```
+4. **UI/UX**:
+   - Layout responsivo com `page-shell`, grids adaptáveis e media queries para header/nav.
+   - Componentes reutilizáveis (`ui-button`, `ui-card`, `ui-input`, `ui-navbar`) facilitam manter o design consistente.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 3. Fluxo de Desenvolvimento
 
-```bash
-ng generate --help
-```
+1. **Iniciar o projeto**:
+   ```bash
+   npm install
+   npm start
+   # ou ng serve
+   ```
+   A aplicação estará disponível em `http://localhost:4200`.
 
-## Building
+2. **Estrutura dos serviços**:
+   - `AuthService` → login/cadastro, estado do usuário e logout.
+   - `CardService` → criação e leitura de cards (conteúdos). Ajuste as rotas conforme sua API.
 
-To build the project run:
+3. **Como adicionar novas features**:
+   - Criar um componente standalone em `src/app/features/...`.
+   - Registrar a rota em `src/app/app.routes.ts`.
+   - Reutilizar os componentes compartilhados para manter o padrão visual.
 
-```bash
-ng build
-```
+## 4. Boas Práticas Seguidas
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **Signals** (`signal`, `computed`) para estado simples no `AuthService`.
+- **Injeção via `inject(...)`** em componentes/serviços, deixando construtores limpos.
+- **Tratamento de API**: os serviços convertem o JSON da API para objetos usados nas telas.
+- **CSS desacoplado**: cada feature tem seu próprio `.scss`, além do estilo global.
+- **Responsividade**: media queries e grids flexíveis, garantindo uso confortável em desktop, tablet e celular.
 
-## Running unit tests
+## 5. Referências Úteis
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- Documentação Angular: <https://angular.dev>
+- Guia de tokens/design system (`src/global-styles.css`)
+- Rotas principais (`src/app/app.routes.ts`)
+- Componentes compartilhados (`src/app/shared/components`)
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
