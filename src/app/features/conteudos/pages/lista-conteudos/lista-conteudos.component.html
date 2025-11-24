@@ -1,16 +1,29 @@
 <section class="page-shell lista-conteudos">
   <ui-navbar></ui-navbar>
 
-  <div class="section-title">Conteúdos recomendados</div>
+  <div class="header-row">
+    <div class="section-title">Conteúdos recomendados</div>
+    <ui-button variant="primary" [routerLink]="['/conteudos/criar']">
+      Criar conteúdo
+    </ui-button>
+  </div>
 
   <div class="cards">
-    <ui-card padding="md">
-      <div class="titulo">Ansiedade — primeiros passos</div>
-      <p>"Guia completo para lidar com episódios…"</p>
-    </ui-card>
-    <ui-card padding="md">
-      <div class="titulo">Como ajudar alguém em crise</div>
-      <p>"Passo a passo prático..."</p>
+    <ui-card
+      padding="md"
+      *ngFor="let conteudo of conteudos"
+      [routerLink]="['/conteudos', conteudo.id]"
+      class="conteudo-card"
+    >
+      <div class="titulo">{{ conteudo.titulo }}</div>
+      <p class="resumo">{{ conteudo.resumo }}</p>
+      <div class="meta">
+        <span class="tipo">{{ conteudo.tipo | titlecase }}</span>
+        <span class="data" *ngIf="conteudo.dataPublicacao">
+          Publicado em {{ conteudo.dataPublicacao | date: 'dd/MM/yyyy' }}
+        </span>
+      </div>
     </ui-card>
   </div>
 </section>
+

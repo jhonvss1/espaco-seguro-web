@@ -23,6 +23,7 @@ interface CadastroModel {
   styleUrl: './cadastro.component.scss',
 })
 export class CadastroComponent {
+  
   model: CadastroModel = {
     nome: '',
     dataNascimento: '',

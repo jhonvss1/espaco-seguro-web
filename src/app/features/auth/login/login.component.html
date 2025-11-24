@@ -3,16 +3,36 @@
     <div class="logo">LOGO ESPAÇO SEGURO</div>
     <h1>ENTRAR NA SUA CONTA</h1>
 
-    <form class="form">
-      <ui-input label="Email:" placeholder="Seu email"></ui-input>
-      <ui-input label="Senha:" type="password" placeholder="Sua senha"></ui-input>
+    <div class="alert success" *ngIf="mensagem">
+      {{ mensagem }}
+    </div>
+    <div class="alert error" *ngIf="erro">
+      {{ erro }}
+    </div>
 
+    <form class="form" (ngSubmit)="onSubmit()" #ngForm="ngForm">
+      <div class="ui-input">
+        <label class="email">Email:</label>
+        <input 
+        type="email" 
+        name="email"
+        placeholder="Email"
+        required
+        [(ngModel)]="model.email"
+        >
+
+        <label for="senha">Senha:</label>
+        <input type="password"
+        name="senha"
+        placeholder="Senha"
+        required
+        [(ngModel)]="model.senha"
+        >
+        
+      </div>    
+    
       <ui-button variant="primary" type="submit">Entrar</ui-button>
 
-      <label class="anonimo">
-        <input type="checkbox" />
-        Entrar anonimamente
-      </label>
     </form>
 
     <div class="footer">

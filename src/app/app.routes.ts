@@ -11,6 +11,7 @@ import { FeedPostagensComponent } from './features/postagens/pages/feed-postagen
 import { DetalhePostagemComponent } from './features/postagens/pages/detalhe-postagem/detalhe-postagem.component';
 import { ListaConteudosComponent } from './features/conteudos/pages/lista-conteudos/lista-conteudos.component';
 import { DetalheConteudoComponent } from './features/conteudos/pages/detalhe-conteudo/detalhe-conteudo.component';
+import { CriarConteudoComponent } from './features/conteudos/pages/criar-conteudo/criar-conteudo.component';
 import { PerfilComponent } from './features/perfil/perfil.component';
 import { AdminComponent } from './features/admin/admin.component';
 import { DocsComponent } from './features/docs/docs.component';
@@ -30,6 +31,7 @@ export const routes: Routes = [
       { path: 'postagens', component: FeedPostagensComponent },
       { path: 'postagens/:id', component: DetalhePostagemComponent },
       { path: 'conteudos', component: ListaConteudosComponent },
+      { path: 'conteudos/criar', component: CriarConteudoComponent },
       { path: 'conteudos/:id', component: DetalheConteudoComponent },
       { path: 'perfil', component: PerfilComponent },
       { path: 'admin', component: AdminComponent },

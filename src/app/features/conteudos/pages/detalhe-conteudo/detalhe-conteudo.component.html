@@ -2,18 +2,34 @@
   <ui-navbar></ui-navbar>
 
   <ui-card padding="lg">
-    <div class="titulo">Título: Ansiedade — primeiros passos</div>
+    <header class="cabecalho">
+      <div>
+        <div class="label">Conteúdo</div>
+        <h1 class="titulo">{{ conteudo.titulo || '...' }}</h1>
+      </div>
+      <div class="meta">
+        <span class="tipo">{{ conteudo.tipo || 'Texto' }}</span>
+        <span class="data">
+          {{
+            conteudo.dataPublicacao
+              ? ('Publicado em ' + (conteudo.dataPublicacao | date: 'dd/MM/yyyy'))
+              : ''
+          }}
+        </span>
+      </div>
+    </header>
+
     <div class="divider"></div>
 
-    <div class="texto">
-      <p>Texto longo explicativo…</p>
-      <p>Cuidados básicos…</p>
-      <p>Técnicas de respiração…</p>
+    <div class="midia" [style.display]="conteudo.urlMidia ? 'block' : 'none'">
+      <img [src]="conteudo.urlMidia || ''" alt="" />
     </div>
 
-    <div class="divider"></div>
-    <div class="acoes">
-      ♥ Curtir &nbsp;&nbsp; 🔄 Compartilhar
+    <div class="texto">
+      <p *ngFor="let paragrafo of paragrafos">
+        {{ paragrafo }}
+      </p>
     </div>
   </ui-card>
 </section>
+

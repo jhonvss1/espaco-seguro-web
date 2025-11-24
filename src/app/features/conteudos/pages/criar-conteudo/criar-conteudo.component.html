@@ -1,0 +1,70 @@
+<section class="page-shell criar-conteudo">
+  <ui-navbar></ui-navbar>
+
+  <ui-card padding="lg">
+    <h1 class="titulo">Criar conteúdo</h1>
+
+    <div class="form-container">
+      <form class="form" (ngSubmit)="onSubmit()" #form="ngForm">
+        <label class="ui-input">
+          <span class="label">Título</span>
+          <input
+            type="text"
+            name="titulo"
+            required
+            placeholder="Ex.: Ansiedade — primeiros passos"
+            [(ngModel)]="model.titulo"
+          />
+        </label>
+        <label class="ui-input">
+          <span class="label">Tipo</span>
+          <select name="tipo" [(ngModel)]="model.tipo">
+            <option value="texto">Texto</option>
+            <option value="infografico">Infográfico</option>
+            <option value="video">Vídeo</option>
+          </select>
+        </label>
+        <label class="ui-input">
+          <span class="label">Resumo</span>
+          <textarea
+            name="resumo"
+            rows="3"
+            required
+            placeholder="Resumo curto para aparecer na lista de conteúdos"
+            [(ngModel)]="model.resumo"
+          ></textarea>
+        </label>
+        <label class="ui-input">
+          <span class="label">URL da mídia (opcional)</span>
+          <input
+            type="text"
+            name="urlMidia"
+            placeholder="Link de imagem ou vídeo"
+            [(ngModel)]="model.urlMidia"
+          />
+        </label>
+        <label class="ui-input">
+          <span class="label">Corpo do conteúdo</span>
+          <textarea
+            name="corpo"
+            rows="8"
+            required
+            placeholder="Texto completo do conteúdo"
+            [(ngModel)]="model.corpo"
+          ></textarea>
+        </label>
+    
+
+      <div class="actions">
+        <ui-button variant="outline" [routerLink]="['/conteudos']">
+          Cancelar
+        </ui-button>
+        <ui-button variant="primary" type="submit">
+          Salvar conteúdo
+        </ui-button>
+      </div>
+    </form>
+    </div>
+  </ui-card>
+</section>
+

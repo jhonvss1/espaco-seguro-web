@@ -80,3 +80,22 @@ body {
   background: var(--color-border);
   margin: var(--space-3) 0;
 }
+
+/* Responsividade global */
+
+@media (max-width: 768px) {
+  .page-shell {
+    padding: var(--space-3) var(--space-2);
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-shell {
+    padding: var(--space-3) var(--space-1);
+  }
+}

@@ -12,8 +12,14 @@
   </nav>
 
   <div class="header-actions">
-    <a routerLink="/login" class="link">Entrar</a>
-    <a routerLink="/cadastro" class="btn btn-primary">Criar conta</a>
+    <ng-container *ngIf="auth.user() as user; else guestLinks">
+      <span class="user-name">Olá, {{ user.nome }}</span>
+      <button type="button" class="link" (click)="logout()">Sair</button>
+    </ng-container>
+    <ng-template #guestLinks>
+      <a routerLink="/login" class="link">Entrar</a>
+      <a routerLink="/cadastro" class="btn btn-primary">Criar conta</a>
+    </ng-template>
   </div>
 </header>
 
