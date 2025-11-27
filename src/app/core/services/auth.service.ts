@@ -6,7 +6,7 @@ export interface AuthUser {
   usuarioId: string;
   nome: string;
   email: string;
-  tokenAcesso?: string;
+  tokenAcesso: string;
   funcao: string
 }
 
