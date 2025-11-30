@@ -2,26 +2,88 @@
   <ui-navbar></ui-navbar>
 
   <ui-card padding="lg">
-    <div class="titulo">POSTAGEM</div>
-    <div class="meta">Autor: Anônimo — há 1h</div>
+    <div class="cabecalho-card">
+      <div class="titulo">POSTAGEM</div>
+      <button
+        type="button"
+        class="btn-cancelar"
+        aria-label="Voltar para listagem"
+        (click)="voltarParaListagem()"
+      >
+        <img src="assets/cancelar.png" alt="Cancelar" />
+      </button>
+    </div>
+
+    <div class="meta">
+      Autor: {{ postagemDetalhada?.autor || 'Anonimo' }}
+      |
+      @if (postagemDetalhada?.dataPublicacao; as data) {
+        <span>
+          {{ data | date: 'short' }}
+        </span>
+      }
+    </div>
+
     <div class="divider"></div>
 
-    <p class="texto">"Hoje acordei com um aperto que não sei explicar…"</p>
+    <p class="texto">
+      {{ postagemDetalhada?.conteudo }}
+    </p>
 
     <div class="divider"></div>
-    <div class="acoes">♥ Curtir &nbsp; 💬 Comentar &nbsp; 🔄 Compartilhar</div>
+
+    <div class="acoes">
+      <button
+        type="button"
+        class="botao-curtida"
+        [class.ativo]="postagemDetalhada?.curtidaPeloUsuario"
+        (click)="alternarCurtida()"
+        [disabled]="!postagemDetalhada"
+      >
+        <img src="assets/coracao.png" alt="Curtir" />
+        <span>{{ postagemDetalhada?.quantidadeCurtidas ?? 0 }}</span>
+      </button>
+      <button
+        type="button"
+        class="botao-comentario"
+        (click)="abrirDialogoComentario()"
+      >
+        <img src="assets/bater-papo.png" alt="Comentarios" />
+        <span>{{ postagemDetalhada?.quantidadeComentarios ?? 0 }}</span>
+      </button>
+    </div>
 
     <div class="divider"></div>
 
     <section class="comentarios">
-      <div class="section-title">COMENTÁRIOS</div>
-      <comentario-item autor="Anônimo" texto="Também sinto isso às vezes…"></comentario-item>
-      <comentario-item autor="Curador" texto="Você não está sozinho"></comentario-item>
+      <div class="section-title">COMENTARIOS</div>
+      <!-- Comentarios ainda estao estaticos; depois podemos dinamizar -->
+      <comentario-item autor="Anonimo" texto="Comentario de exemplo"></comentario-item>
+      <comentario-item autor="Curador" texto="Voce nao esta sozinho"></comentario-item>
     </section>
 
     <div class="divider"></div>
-    <div class="escreva">Escreva um comentário:</div>
+    <div class="escreva">Escreva um comentario:</div>
     <textarea placeholder="Escreva aqui"></textarea>
-    <ui-button variant="primary">Enviar</ui-button>
+    <div class="acoes-form">
+      <button type="button" class="botao-voltar" (click)="voltarParaListagem()">Voltar</button>
+      <ui-button variant="primary">Enviar</ui-button>
+    </div>
   </ui-card>
 </section>
+
+@if (dialogoComentarioAberto) {
+  <div class="comentario-modal-overlay" (click)="fecharDialogoComentario()">
+    <div class="comentario-modal" (click)="$event.stopPropagation()">
+      <h3>Comentar postagem</h3>
+      <textarea
+        placeholder="Escreva seu comentario"
+        [(ngModel)]="textoComentario"
+      ></textarea>
+      <div class="modal-acoes">
+        <ui-button variant="secondary" (click)="fecharDialogoComentario()">Cancelar</ui-button>
+        <ui-button variant="primary" (click)="registrarComentario()">Comentar</ui-button>
+      </div>
+    </div>
+  </div>
+}

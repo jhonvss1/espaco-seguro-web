@@ -1,5 +1,30 @@
 <ui-card padding="md" class="postagem">
-  <header>{{ autor }} — {{ tempo }}</header>
-  <p>"{{ texto }}"</p>
-  <footer>♥ {{ likes }} &nbsp;&nbsp; 💬 {{ comentarios }}</footer>
+  <header>{{ autor }} | {{ tempo | date: 'short' }}</header>
+  <p>{{ texto }}</p>
+  <footer class="acoes">
+    <button
+      type="button"
+      class="botao-curtida"
+      [class.ativo]="curtido"
+      (click)="emitirAlternanciaCurtida($event)"
+    >
+      <img src="assets/coracao.png" alt="Curtir" />
+      <span>{{ likes }}</span>
+    </button>
+    <button
+      type="button"
+      class="botao-comentario"
+      (click)="emitirSolicitacaoComentarios($event)"
+    >
+      <img src="assets/bater-papo.png" alt="Comentários" />
+      <span>{{ comentarios }}</span>
+    </button>
+    <button
+      type="button"
+      class="botao-detalhes"
+      (click)="emitirAberturaDetalhes($event)"
+    >
+      <img src="assets/detalhes.png" alt="Detalhes" />
+    </button>
+  </footer>
 </ui-card>

@@ -1,35 +1,54 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class PostagensService {
-  
-  private apiBase = 'https://localhost:7296/api/Postagem'
+  private readonly urlApiPostagens = 'https://localhost:7296/api/Postagem';
+  private readonly urlApiCurtidas = 'https://localhost:7296/api/Curtida';
 
-  constructor(private httpClient: HttpClient, private authService: AuthService){}
+  constructor(private clienteHttp: HttpClient, private servicoAutenticacao: AuthService) {}
 
+  criarPostagem(dadosPostagem: { conteudo: string; anonimo: boolean }): Observable<any> {
+    const urlCriacao = `${this.urlApiPostagens}/criar`;
+    const usuarioAutenticado = this.servicoAutenticacao.getCurrentUser();
 
-criarPostagem(payload:{  
-  conteudo:string;
-  anonimo: boolean;
-}): Observable<any>{
-  const url = `${this.apiBase}/criar`
-  const user = this.authService.getCurrentUser();
+    const corpoRequisicao = {
+      ...dadosPostagem,
+      autorId: usuarioAutenticado?.usuarioId ?? null,
+    };
 
-  const body = {
-    ...payload,
-    autorId: user?.usuarioId ?? null,
-  };
+    return this.clienteHttp.post(urlCriacao, corpoRequisicao);
+  }
 
-  return this.httpClient.post(url, body);
+  listarPostagens(): Observable<any[]> {
+    const urlListagem = `${this.urlApiPostagens}/obter-todas`;
+    return this.clienteHttp.get<any[]>(urlListagem);
+  }
+
+  obterPostagemPorId(identificadorPostagem: string): Observable<any> {
+    const urlDetalhe = `${this.urlApiPostagens}/obter/${identificadorPostagem}`;
+    return this.clienteHttp.get<any>(urlDetalhe);
+  }
+
+  curtirPostagem(identificadorPostagem: string): Observable<any> {
+    const usuarioAutenticado = this.servicoAutenticacao.getCurrentUser();
+    const usuarioId = usuarioAutenticado?.usuarioId ?? '';
+
+    const urlCurtida = `${this.urlApiCurtidas}/${identificadorPostagem}`;
+    const parametros = new HttpParams().set('usuarioId', usuarioId);
+
+    return this.clienteHttp.post(urlCurtida, null, { params: parametros });
+  }
+
+  descurtirPostagem(identificadorPostagem: string): Observable<any> {
+    const usuarioAutenticado = this.servicoAutenticacao.getCurrentUser();
+    const usuarioId = usuarioAutenticado?.usuarioId ?? '';
+
+    const urlCurtida = `${this.urlApiCurtidas}/${identificadorPostagem}`;
+    const parametros = new HttpParams().set('usuarioId', usuarioId);
+
+    return this.clienteHttp.delete(urlCurtida, { params: parametros });
+  }
 }
-
-listarPostagens(){
-  const url = `${this.apiBase}/obter-todas`
-  return this.httpClient.get<any[]>(url);
-}
-
-}
-

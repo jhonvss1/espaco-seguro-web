@@ -3,14 +3,14 @@
 
   <ui-card padding="lg" class="composer">
     <div class="form-container">
-      <form class="form" (ngSubmit)="OnSubmit()" #form="ngForm">
+      <form class="form" (ngSubmit)="aoEnviarPostagem()" #formulario="ngForm">
         <div class="prompt">O que você quer compartilhar hoje?</div>
 
         <textarea
           placeholder="Escreva algo..."
           type="text"
           name="conteudo"
-          [(ngModel)]="model.conteudo"
+          [(ngModel)]="formularioPostagem.conteudo"
         ></textarea>
 
         <div class="checkbox">
@@ -18,7 +18,7 @@
             <input
               type="checkbox"
               name="anonimo"
-              [(ngModel)]="model.anonimo"
+              [(ngModel)]="formularioPostagem.anonimo"
               checked
             />
             Modo anônimo
@@ -32,15 +32,40 @@
 
   <div class="section-title">Postagens recentes</div>
   <div class="posts">
-    <postagem-card
-      *ngFor="let p of postagens"
-      [autor]="p.anonimo ? 'Anônimo' : 'Usuário'"
-      [tempo]="p.dataPublicacao"
-      [texto]="p.conteudo"
-      [likes]="p.qtdCurtidas"
-      [comentarios]="p.qtdComentarios"
-    >
-    </postagem-card>
+    <div class="postagem-wrapper" *ngFor="let postagem of postagensApresentacao">
+      <postagem-card
+        [autor]="postagem.anonimo ? 'Anônimo' : 'Usuário'"
+        [tempo]="postagem.dataPublicacao"
+        [texto]="postagem.conteudo"
+        [likes]="postagem.quantidadeCurtidas"
+        [comentarios]="postagem.quantidadeComentarios"
+        [curtido]="postagem.curtidaPeloUsuario"
+        (alternarCurtida)="alternarCurtida(postagem)"
+        (solicitarComentarios)="abrirDialogoComentario(postagem)"
+        (abrirDetalhes)="abrirDetalhePostagem(postagem.id)"
+      >
+      </postagem-card>
+    </div>
   </div>
-</section>
 
+  @if (dialogoComentarioAberto) {
+    <div class="comentario-modal-overlay" (click)="fecharDialogoComentario()">
+      <div class="comentario-modal" (click)="$event.stopPropagation()">
+        <h3>Comentar postagem</h3>
+        <p *ngIf="postagemComComentario as selecionada">
+          {{ selecionada.anonimo ? 'Anônimo' : 'Usuário' }} -
+          {{ (selecionada.conteudo || '') | slice:0:80
+          }}{{ (selecionada.conteudo || '').length > 80 ? '...' : '' }}
+        </p>
+        <textarea
+          placeholder="Escreva seu comentário"
+          [(ngModel)]="textoComentario"
+        ></textarea>
+        <div class="modal-acoes">
+          <ui-button variant="secondary" (click)="fecharDialogoComentario()">Cancelar</ui-button>
+          <ui-button variant="primary" (click)="registrarComentario()">Comentar</ui-button>
+        </div>
+      </div>
+    </div>
+  }
+</section>
