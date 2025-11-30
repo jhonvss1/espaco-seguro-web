@@ -6,14 +6,13 @@ import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class PostagensService {
-  private readonly apiUrl = environment.apiUrl;
-  private readonly urlApiPostagens = `${this.apiUrl}/api/Postagem`;
-  private readonly urlApiCurtidas = `${this.apiUrl}/api/Curtida`;
+  private readonly baseUrlPostagens = `${environment.apiUrl}/api/Postagem`;
+  private readonly baseUrlCurtidas = `${environment.apiUrl}/api/Curtida`;
 
   constructor(private clienteHttp: HttpClient, private servicoAutenticacao: AuthService) {}
 
   criarPostagem(dadosPostagem: { conteudo: string; anonimo: boolean }): Observable<any> {
-    const urlCriacao = `${this.urlApiPostagens}/criar`;
+    const urlCriacao = `${this.baseUrlPostagens}/criar`;
     const usuarioAutenticado = this.servicoAutenticacao.getCurrentUser();
 
     const corpoRequisicao = {
@@ -25,12 +24,12 @@ export class PostagensService {
   }
 
   listarPostagens(): Observable<any[]> {
-    const urlListagem = `${this.urlApiPostagens}/obter-todas`;
+    const urlListagem = `${this.baseUrlPostagens}/obter-todas`;
     return this.clienteHttp.get<any[]>(urlListagem);
   }
 
   obterPostagemPorId(identificadorPostagem: string): Observable<any> {
-    const urlDetalhe = `${this.urlApiPostagens}/obter/${identificadorPostagem}`;
+    const urlDetalhe = `${this.baseUrlPostagens}/obter/${identificadorPostagem}`;
     return this.clienteHttp.get<any>(urlDetalhe);
   }
 
@@ -38,7 +37,7 @@ export class PostagensService {
     const usuarioAutenticado = this.servicoAutenticacao.getCurrentUser();
     const usuarioId = usuarioAutenticado?.usuarioId ?? '';
 
-    const urlCurtida = `${this.urlApiCurtidas}/${identificadorPostagem}`;
+    const urlCurtida = `${this.baseUrlCurtidas}/${identificadorPostagem}`;
     const parametros = new HttpParams().set('usuarioId', usuarioId);
 
     return this.clienteHttp.post(urlCurtida, null, { params: parametros });
@@ -48,7 +47,7 @@ export class PostagensService {
     const usuarioAutenticado = this.servicoAutenticacao.getCurrentUser();
     const usuarioId = usuarioAutenticado?.usuarioId ?? '';
 
-    const urlCurtida = `${this.urlApiCurtidas}/${identificadorPostagem}`;
+    const urlCurtida = `${this.baseUrlCurtidas}/${identificadorPostagem}`;
     const parametros = new HttpParams().set('usuarioId', usuarioId);
 
     return this.clienteHttp.delete(urlCurtida, { params: parametros });

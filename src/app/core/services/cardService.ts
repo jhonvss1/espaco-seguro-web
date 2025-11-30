@@ -6,8 +6,7 @@ import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CardService {
-  private readonly apiUrl = environment.apiUrl;
-  private readonly apiBase = `${this.apiUrl}/api/Card`;
+  private readonly baseUrl = `${environment.apiUrl}/api/Card`;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {}
   
@@ -18,7 +17,7 @@ export class CardService {
     tipo: 'texto' | 'infografico' | 'video';
     urlMidia: string;    
   }):Observable<any> {
-    const url = `${this.apiBase}/criar`;
+    const url = `${this.baseUrl}/criar`;
     const user = this.authService.getCurrentUser();
 
     const body = {
@@ -30,12 +29,12 @@ export class CardService {
   }
 
   listarCards(): Observable<any[]> {
-    const url = `${this.apiBase}/obter-todos`;
+    const url = `${this.baseUrl}/obter-todos`;
     return this.httpClient.get<any[]>(url);
   }
 
   obterCardPorId(id: string): Observable<any> {
-    const url = `${this.apiBase}/obter/${id}`;
+    const url = `${this.baseUrl}/obter/${id}`;
     return this.httpClient.get<any>(url);
   }
 }

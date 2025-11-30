@@ -15,8 +15,8 @@ const AUTH_USER_KEY = 'espaco_seguro_auth_user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly apiUrl = environment.apiUrl;
-  private readonly apiBase = `${this.apiUrl}/api`;
+  private readonly baseUrlAuth = `${environment.apiUrl}/api/Auth`;
+  private readonly baseUrlUsuario = `${environment.apiUrl}/api/Usuario`;
 
   private readonly _user = signal<AuthUser | null>(null);
   readonly user = this._user.asReadonly();
@@ -64,7 +64,7 @@ export class AuthService {
     confirmarSenha: string;
     aceitaTermos: boolean;
   }): Observable<any> {
-    const url = `${this.apiBase}/Usuario/criar`;
+    const url = `${this.baseUrlUsuario}/criar`;
     return this.http.post(url, payload);
   }
 
@@ -72,7 +72,7 @@ export class AuthService {
     email: string;
     senha: string;
   }): Observable<AuthUser> {
-    const url = `${this.apiBase}/Auth/login`;
+    const url = `${this.baseUrlAuth}/login`;
     return this.http.post<AuthUser>(url, payload).pipe(
       tap((response: any) => {        
         const user: AuthUser = {
