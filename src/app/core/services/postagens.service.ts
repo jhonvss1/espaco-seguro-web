@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class PostagensService {
-  private readonly urlApiPostagens = 'https://localhost:7296/api/Postagem';
-  private readonly urlApiCurtidas = 'https://localhost:7296/api/Curtida';
+  private readonly apiUrl = environment.apiUrl;
+  private readonly urlApiPostagens = `${this.apiUrl}/api/Postagem`;
+  private readonly urlApiCurtidas = `${this.apiUrl}/api/Curtida`;
 
   constructor(private clienteHttp: HttpClient, private servicoAutenticacao: AuthService) {}
 

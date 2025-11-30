@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CardService {
-  private readonly apiBase = 'https://localhost:7296/api/Card';
+  private readonly apiUrl = environment.apiUrl;
+  private readonly apiBase = `${this.apiUrl}/api/Card`;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {}
   

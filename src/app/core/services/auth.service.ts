@@ -1,6 +1,7 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface AuthUser {
   usuarioId: string;
@@ -14,7 +15,8 @@ const AUTH_USER_KEY = 'espaco_seguro_auth_user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly apiBase = 'https://localhost:7296/api';
+  private readonly apiUrl = environment.apiUrl;
+  private readonly apiBase = `${this.apiUrl}/api`;
 
   private readonly _user = signal<AuthUser | null>(null);
   readonly user = this._user.asReadonly();
@@ -70,7 +72,7 @@ export class AuthService {
     email: string;
     senha: string;
   }): Observable<AuthUser> {
-    const url = this.apiBase + '/Auth/login';
+    const url = `${this.apiBase}/Auth/login`;
     return this.http.post<AuthUser>(url, payload).pipe(
       tap((response: any) => {        
         const user: AuthUser = {
